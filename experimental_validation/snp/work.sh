@@ -17,6 +17,7 @@ blastn -query batchPrimer3.primer.fa -out batchPrimer3.primer.blastout -db /hwfs
 # find specific primers, (identity <80%), output primer ids
 python3 ../check_PrimerBlastResult.py batchPrimer3.primer.blastout 0.8 >batchPrimer3.primer.blastout.good
 sort batchPrimer3.primer.blastout.good > batchPrimer3.primer.blastout.good.sort
+
 # retrieve primers based on primer id
 python3 ../pickGoodPrimers.py batchPrimer3.primer.txt batchPrimer3.primer.blastout.good.sort
 
