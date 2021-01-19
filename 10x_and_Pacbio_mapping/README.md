@@ -12,9 +12,9 @@ S4
 ```
 
 
-run baw mem alignment
+#### run baw mem alignment using 10x illumina reads
 
-```
+```shell
 ref="data/mat.genome.fa"
 gatk="software/gatk-4.1.4.1/gatk"
 samtools="software/samtools-1.8/bin/samtools"
@@ -33,57 +33,38 @@ $samtools index $outdir/${a}.sorted.markdup.bam && echo \"** index done **\" " >
 done
 ```
 
-#### combine sub bam files together, and prepare for variation calling
+#### run ngmlr using corrected Pacbio reads
+
+```shell
+ngmlr="software/All_kinds_align/ngmlr-0.2.7/ngmlr"
+pat_genome="xxx/pat.genome.curated.fa"
+mat_genome="xxx/mat.genome.curated.fa"
+$ngmlr -t 8 -r $pat_genome -q xxx/marmoset/corrected_pacbio/pat/pat.pb.corrected.fa.gz |samtools view -bS - >pat.pb.corrected.bam
+
+$ngmlr -t 8 -r $pat_genome -q xxx/marmoset/corrected_pacbio/mat/mat.pb.corrected.fa.gz |samtools view -bS - >mat.pb.corrected.bam
 
 ```
-$samtools addreplacerg -@ 4 -r '@RG\tID:foo\tPL:illumina\tSM:OFFSP' -o out.sorted.addRG.bam maternal.merge.sorted.bam
-$samtools index out.sorted.addRG.bam
-```
 
-#### prepare index for reference
-```
-ref="data/mat.genome.fa"
-gatk="software/gatk-4.1.4.1/gatk"
-samtools="software/samtools-1.8/bin/samtools"
-#0 check ref's index fai
-wkdir=`pwd`
-if [ -f $ref.fai ]
-then
-	echo "fasta index fai of reference is fine!"
-else
-	cd ${ref%/*}
-	$samtools faidx $ref
-	cd $wkdir
-fi
+#### run ngmlr using raw Pacbio reads
 
-if [ -f ${ref%%.*}.dict ]
-then
-	echo "fasta index dict of reference is fine!"
-else
-	cd ${ref%/*}
-	$gatk CreateSequenceDictionary -R $ref
-	cd $wkdir
-fi
-```
-
-#### run GATK to call variations
-
-##### generating gvcf file
+##### 1. assign raw pacbio reads by sequence ids
 
 ```
-time $gatk HaplotypeCaller \
-	-R $ref \
-	--emit-ref-confidence GVCF \
-	-I out.sorted.addRG.bam \
-	--native-pair-hmm-threads 12 \
-	-O out.g.vcf && echo "** gvcf done **"
-```
-
-##### 2 variation calling
+gzip -dc triocanu/mat/asm.correctedReads.fasta.gz |grep '^>' |sed 's/>//g' >mat.asm.correctedReads.id
+gzip -dc triocanu/pat/asm-haplotypePaternal.correctedReads.fasta.gz|grep '^>' |sed 's/>//g' >pat.asm.correctedReads.id
+python3 assign_raw_Pacbio.py raw.fasta mat.asm.correctedReads.id pat.asm.correctedReads.id raw_pacbio
 
 ```
-time $gatk GenotypeGVCFs \
-	-R $ref \
-	-V out.g.vcf \
-	-O out.vcf && echo "** vcf done **"
+
+##### 2. run ngmlr
+
+```shell
+ngmlr="software/All_kinds_align/ngmlr-0.2.7/ngmlr"
+pat_genome="xxx/pat.genome.curated.fa"
+mat_genome="xxx/mat.genome.curated.fa"
+$ngmlr -t 8 -r $pat_genome -q xxx/marmoset/raw_pacbio/pat/pat.pb.raw.fa.gz |samtools view -bS - >pat.pb.raw.bam
+
+$ngmlr -t 8 -r $pat_genome -q xxx/marmoset/raw_pacbio/mat/mat.pb.raw.fa.gz |samtools view -bS - >mat.pb.raw.bam
+
 ```
+
