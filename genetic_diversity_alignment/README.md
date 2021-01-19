@@ -2,23 +2,20 @@
 
 To call heterozygous sites between the two haploid sequences, independent of the GenomeScope calculation, we first performed a Mummer alignment. Because our assemblies span most repetitive sequences, repeat-masking treatment was not necessary before conducting Mummer alignment. 
 
-```
-split_genome_bychrs.py
-```
 
 ### split genome by chrs
 
 two haplotype assemblies will be splited into different folder by chromosome ID.
 
 ```shell
-python3 split_chrs.py mCalJac1.maternal.chrs.fa mCalJac1.paternal.chrs.fa
+python3 split_genome_bychrs.py mCalJac1.maternal.chrs.fa mCalJac1.paternal.chrs.fa
 ```
 Note: the fasta sequence header is formatted like 'mat_Chr1' for maternal, and 'patChr1' for maternal.
 
 ### Mummer alignment
 
 ```shell
-cat list|while read a
+cat chr.list|while read a
 do
 	cd $a
 	echo "software/MUMmer-3.23/nucmer -maxmatch -l 100 -c 500 -p $a mat_$a.fa pat_$a.fa

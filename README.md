@@ -11,21 +11,15 @@ This repository collects most customized scripts for genetic diveristy analysis 
 
 - Heterozygosity spectrum between paternal and maternal genomes
 	- [SNV calling](genetic_diversity_alignment/README.md)
-	- [sequencing and polishing error measurement](sequencing_and_polishing_error/README.md)
+	- [sequencing and polishing error measurement](sequencing_and_polishing_error/README.md.html)
 	- [small indels](genetic_diversity_alignment/README.md)
 	- [PCR validation for SNVs and small indels](experimental_validation/README.md)
-	- [SV detection](structure_variations/README.txt)
-	- [repetitive element and SV enrichment analysis]()
+	- [SV detection](structure_variations/README.md.html)
 	- [ROH](ROH/README.txt)
 - Marmoset biology
-	- [positive analysis](positive_selection/README.txt)
+	- [positive analysis](positive_selection/README.md)
 
 
-## Software & Tools list
-
-- alignment
-- snp calling
-- 
 
 
 
