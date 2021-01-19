@@ -10,14 +10,15 @@ This assembly represents the principal haplotype of the diploid genome Callithri
 This repository collects most customized scripts for genetic diveristy analysis for marmset project, including genetic diversity analysis, sequencing & polishing error measurement, run of homozygosity, and chimerism analysis.
 
 - Heterozygosity spectrum between paternal and maternal genomes
-	- [SNV calling](genetic_diversity_alignment/README.md)
-	- [sequencing and polishing error measurement](sequencing_and_polishing_error/README.md.html)
-	- [small indels](genetic_diversity_alignment/README.md)
-	- [PCR validation for SNVs and small indels](experimental_validation/README.md)
-	- [SV detection](structure_variations/README.md.html)
+	- [Mummer alignment, SNV and Small indels](Mummer_alignment/README.md)
+	- [10x_and_Pacbio_mapping](10x_and_Pacbio_mapping/README.md)
+	- [Sequencing and polishing error measurement](sequencing_and_polishing_error/README.md.html)
+	- [SV detection](Structure_variations/README.md.html)
+	- [PCR validation for SNVs and small indels](Experimental_validation/README.md)
 	- [ROH](ROH/README.txt)
+
 - Marmoset biology
-	- [positive analysis](positive_selection/README.md)
+	- [Positive analysis](positive_selection/README.md)
 
 
 

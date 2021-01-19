@@ -4,24 +4,25 @@
 
 # SVs
 
-## detect SVs
+
 
 Structural variation was originally defined as insertions, deletions and inversions greater than 50 bp in size.
 
 
 ### detection of structure variation
+
 A series of custom scripts (https://github.com/comery/marmoset) identified and sorted our SNPs, indels in the alignments. We employed svmu (v0.4-alpha), Assemblytics (v1.2) and SyRi (v1.0), to detect SVs from Mummer alignment. After several test rounds, we found that svmu reported more accurate large indels, Assemblytics detected CNVs, particularly tandem repeats, whereas SyRi detected other SVs well. Hence, we employed these three methods and combined the results as confident SVs. For Mummer alignment, we used the settings of “nucmer --maxmatch -c 500 -b 500 -l 100” and following filtering of “delta-filter -m -i 90 -l 100”, which was recommended by SyRi (https://schneebergerlab.github.io/syri/), while we used default parameters for svmu and Assemblytics. 
 
 
 ### run SyRi to detect SVs (INV, INVTR, TRANS)
 
-current directory: xxx/marmoset/2.genetic_divergency/Alignment_nomask/Mummer_syri
+current directory: xxx/marmoset/2.genetic_divergency/Alignment_nomask/syri
 
 The SyRI (Synteny and Rearrangement Identifier), a method to identify structural as well as sequence differences between two whole-genome assemblies. SyRI expects whole-genome alignments (WGA) as input and starts by searching for differences in the structures of the genomes. Afterwards, SyRI identifies local sequence differences within both the rearranged and the non-rearranged (syntenic) regions. SyRI annotates the coordinates of rearranged regions (i.e., breakpoints on both sides of a rearrangement in both genomes) providing a complete regional annotation of rearrangements. 
 
 ~~~~~bash
-data="xxx/marmoset/2.genetic_divergency/Alignment_masked/Chrs"
-cat list|while read a
+data="xxx/marmoset/2.genetic_divergency/Alignment_nomask/Chrs"
+cat ../chr.list|while read a
 do
 	[ -d $a ] || mkdir $a
 	cd $a
@@ -54,13 +55,13 @@ mummer alignment delat file can get from above, but here we need do a filtering 
 current directory: xxx/marmoset/2.genetic_divergency/Alignment_nomask/svmu
 
 ~~~~~bash
-dir="xxx/marmoset/2.genetic_divergency/Alignment_masked"
+dir="xxx/marmoset/2.genetic_divergency/Alignment_nomask"
 snp_mode="l"
-cat list|grep -v '^#'|while read a
+cat ../chr.list|grep -v '^#'|while read a
 do
 	[ -d $a ] || mkdir $a
 	cd $a
-	echo "$software/svmu-0.4-alpha/svmu $dir/Mummer_syri/$a/$a.delta.filt $dir/Chrs/$a/mat_$a.fa $dir/Chrs/$a/pat_$a.fa $snp_mode $dir/Lastz/$a/$a.lastz.txt $a " > $a.svmu.sh
+	echo "$software/svmu-0.4-alpha/svmu $dir/syri/$a/$a.delta.filt $dir/Chrs/$a/mat_$a.fa $dir/Chrs/$a/pat_$a.fa $snp_mode $dir/Lastz/$a/$a.lastz.txt $a " > $a.svmu.sh
 	# sh  $a.svmu.sh
 	cd ..
 done
@@ -72,15 +73,15 @@ done
 ~~~~~bash
 data="Alignment_nomask/Mummer"
 assemblytics="software/Genome/Assemblytics-1.2/scripts/Assemblytics"
-cat ../list|while read a
+cat ../chr.list|while read a
 do
 	[ -d $a ] || mkdir $a
 	cd $a
 	[ -e $a.delta ] || ln -s $data/$a/$a.delta
 	# Assemblytics delta output_prefix unique_length_required min_size max_size
 	$assemblytics $a.delta $a 10000 50 100000 && echo "$a done!"
-	/hwfssz1/ST_DIVERSITY/PUB/USER/yangchentao/software/Genome/Assemblytics-1.2/scripts/Assemblytics_dotplot.R $a
-	python3 /hwfssz1/ST_DIVERSITY/PUB/USER/yangchentao/software/Genome/Assemblytics-1.2/scripts/Assemblytics_within_alignment.py --delta $a.delta --min 50 --output $a.variants_within_alignments.bed
+	software/Genome/Assemblytics-1.2/scripts/Assemblytics_dotplot.R $a
+	python3 software/Genome/Assemblytics-1.2/scripts/Assemblytics_within_alignment.py --delta $a.delta --min 50 --output $a.variants_within_alignments.bed
 	cat $a.variants_within_alignments.bed $a.variants_between_alignments.bed|sort -k2n > $a.Assemblytics_structural_variants.bed
 
 	cd ..
