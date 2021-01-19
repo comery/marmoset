@@ -12,7 +12,7 @@ This repository collects most customized scripts for genetic diveristy analysis 
 - Heterozygosity spectrum between paternal and maternal genomes
 	- [Mummer alignment, SNV and Small indels](Mummer_alignment/README.md)
 	- [10x_and_Pacbio_mapping](10x_and_Pacbio_mapping/README.md)
-	- [Sequencing and polishing error measurement](sequencing_and_polishing_error/README.md)
+	- [Sequencing and polishing error measurement](Sequencing_and_polishing_error/README.md)
 	- [SV detection](Structure_variations/README.md)
 	- [PCR validation for SNVs and small indels](Experimental_validation/README.md)
 	- [ROH](ROH/README.txt)
