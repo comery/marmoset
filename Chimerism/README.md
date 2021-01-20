@@ -4,11 +4,14 @@ We utilized SNV phasing information identify all the possible alleles for each i
 
 Each allele represented one unique combination genotype of the two SNVs (Fig. 1). We calculate the number of reads support for each allele. And base on the raking of the number for each allele, the top two alleles are considered as major alleles and the rest two are minor alleles. Thus, windows are assigned as chimeric if there contain more than two allele types.
 
-![Fig 1](Fig 1.png)
+![Fig 1](Fig1.png)
 Figure 1. Diagram of allele detection process. Each window spans two SNVs. The number on the left of blue line represents the number of supported reads for each allele genotype. In this case, window 1 have two alleles and window 2 contain three alleles. 
 
 
-During the trio-binning process, some of the Pacbio reads derived from the minor alleles might be selected as parental specific alleles thus were used in the assembly process. In principle, these reads will have lower chance to be assembled because of the low-depth sequencing. However, because the PCR and sequencing process is evenly distributed between alleles, it is possible that some of the minor alleles can be sequenced in relative high depth thus can be used in assembly. We next estimate how much proportion of the assembly mixed with major alleles and minor alleles by mapping the paternal and maternal assemblies to the phasing alleles (Fig. 2). If the genotype in the assembly is similar with the genotype of major allele, we consider the genomic regions were derived from major alleles. ![Fig 2](Fig 2.png)
+During the trio-binning process, some of the Pacbio reads derived from the minor alleles might be selected as parental specific alleles thus were used in the assembly process. In principle, these reads will have lower chance to be assembled because of the low-depth sequencing. However, because the PCR and sequencing process is evenly distributed between alleles, it is possible that some of the minor alleles can be sequenced in relative high depth thus can be used in assembly. We next estimate how much proportion of the assembly mixed with major alleles and minor alleles by mapping the paternal and maternal assemblies to the phasing alleles (Fig. 2). If the genotype in the assembly is similar with the genotype of major allele, we consider the genomic regions were derived from major alleles. 
+
+![Fig 2](Fig2.png)
+Figure 2. An example demonstrates the mis-assembly on reference (maternal) assembly
 
 
 
