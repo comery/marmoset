@@ -13,7 +13,7 @@ Some Y-linked scaffolds may have normal coverage of female reads mapped due to t
 - Y.bed: confirmed Y-linked scaffolds/chromosome, BED format
 - scaf.bed: unplaced scaffolds, BED format
 
-##How to run
+## How to run
 
 ```bash
 awk '{print $4"\t"$0}' input_10000_abs.bed | cut -f1-4 > input_10000_abs.bed.cut

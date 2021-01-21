@@ -1,6 +1,5 @@
 #!/usr/bin/perl -w
 use strict;
-use lib '/hwfssz1/ST_DIVERSITY/PUB/USER/zhangpei/perl/pm';
 use Pvalue_adj;
 use Math::CDF qw(:all);
 
