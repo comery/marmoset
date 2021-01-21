@@ -22,8 +22,6 @@ This repository collects most customized scripts for genetic diveristy analysis 
 	- [Chimerism](Chimerism/README.md)
 	- [ROH](ROH/README.txt)
 
-- Marmoset biology
-	- [Positive analysis](positive_selection/README.md)
 
 
 
