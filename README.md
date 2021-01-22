@@ -24,7 +24,7 @@ This repository collects most customized scripts for genetic diveristy analysis 
 
 - Y sequence
 	- [Y identification by HiC](Y_identification_by_HiC/README.md)
-	- [decollapse](decollapse_Y/README.md)
+	- [Decollapse](https://github.com/gf777/misc/tree/master/marmoset%20Y)
 
 
 
