@@ -22,7 +22,9 @@ This repository collects most customized scripts for genetic diveristy analysis 
 	- [Chimerism](Chimerism/README.md)
 	- [ROH](ROH/README.txt)
 
-- [Y identification by HiC](Y_identification_by_HiC/README.md)
+- Y sequence
+	- [Y identification by HiC](Y_identification_by_HiC/README.md)
+	- [decollapse](decollapse_Y/README.md)
 
 
 
