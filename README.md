@@ -20,7 +20,7 @@ This repository collects most customized scripts for genetic diveristy analysis 
 	- [SV detection](Structure_variations/README.md)
 	- [PCR validation for SNVs and small indels](Experimental_validation/README.md)
 	- [Chimerism](Chimerism/README.md)
-	- [ROH](ROH/README.txt)
+	- [ROH](ROH/README.md)
 
 - Y sequence
 	- [Y identification by HiC](Y_identification_by_HiC/README.md)
