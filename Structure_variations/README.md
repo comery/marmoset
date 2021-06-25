@@ -1,9 +1,5 @@
-<meta charset="utf-8" emacsmode="-*- markdown -*-"> <link rel="stylesheet" href="https://casual-effects.com/markdeep/latest/journal.css?">
-
-
 
 # SVs
-
 
 
 Structural variation was originally defined as insertions, deletions and inversions greater than 50 bp in size.
@@ -107,15 +103,7 @@ cat ../list |while read a;do cd $a; python3 ../calCNVdensity.py $a.cnv.fil.bed c
 ~~~~~
 
 
-
-
 ### verify SVs
 
 To generate a high-quality SV dataset, we manually checked all inversions and translocations with the following steps: a) clip 300 bp of upstream/downstream flanking sequence of each breakpoint between the two haplotypes, blast against local Pacbio reads with threshold identity >96% and aligned length >550 bp, and require the SV region where the maternal and paternal sequences aligned to have high similarity (>90%); b) if (a) failed, then check the 10X linked-read count between a 5 kb flanking region; c) if any breakpoint is not supported by 10X linked-reads, check the Hi-C heatmap of this region; if it shows an inversion or translocation pattern on heatmap or an ambiguous situation, then remove it.
 
-
-
-
-
-<style class="fallback">body{visibility:hidden}</style><script>markdeepOptions={tocStyle:'long'};</script>
-<!-- Markdeep: --><script src="https://casual-effects.com/markdeep/latest/markdeep.min.js?" charset="utf-8"></script>
