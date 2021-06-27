@@ -28,6 +28,21 @@ This repository collects most customized scripts for genetic diveristy analysis 
 
 
 
+## Software dependencies
+
+If you want to rerun all analyses, you should install these software:
+
+- gatk-4.1.4.1
+- samtools-1.8
+- bcftools-1.8
+- bwa
+- ngmlr-0.2.7
+- MUMmer-3.23
+- sratoolkit.2.9.2
+- plink-v1.90b5.1
+- syri-1.0
+- svmu-0.4-alpha
+- Assemblytics-1.2
 
 
 
